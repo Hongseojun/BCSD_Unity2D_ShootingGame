@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     public GameObject bulletObjA;
     public GameObject bulletObjB;
 
+    public GameManager manager;
+
     Animator anim;
 
     void Awake()
@@ -167,7 +169,7 @@ public class Player : MonoBehaviour
             switch (collosion.gameObject.name)
             {
                 case "Top":
-                    isTouchTop = true; 
+                    isTouchTop = true;
                     break;
                 case "Bottom":
                     isTouchBottom = true;
@@ -179,6 +181,11 @@ public class Player : MonoBehaviour
                     isTouchLeft = true;
                     break;
             }
+        }
+        else if (collosion.gameObject.tag == "Enemy" || collosion.gameObject.tag == "EnemyBullet")
+        {
+            manager.RespawnPlayer();
+            gameObject.SetActive(false);
         }
     }
 
